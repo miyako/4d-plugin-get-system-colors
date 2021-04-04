@@ -1,0 +1,11 @@
+{
+	"name": "System Colors",
+	"id": 20000,
+	"commands": [
+		{
+			"theme": "Get System Color",
+			"syntax": "Get system colors:J",
+			"threadSafe": true
+		}
+	]
+}
