@@ -12,7 +12,7 @@ for macOS (10.13 SDK, before dark mode)
 
 ```
 If (Form event=On Load)
-	$c:=JSON Parse(Get system colors )
+	$c:=Get system colors 
 	
 	OBJECT GET COORDINATES(*;"T0";$x;$y;$r;$b)
 	$h:=$b-$y
