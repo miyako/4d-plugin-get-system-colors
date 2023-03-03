@@ -146,6 +146,16 @@ void Get_system_colors(PA_PluginParameters params) {
               L"alternateSelectedControlTextColor", getColorRGB([NSColor alternateSelectedControlTextColor]));
     ob_set_n(returnValue,
               L"scrubberTexturedBackgroundColor", getColorRGB([NSColor scrubberTexturedBackgroundColor]));
+    if (@available(macOS 10.14, *)) {
+        ob_set_n(returnValue,
+                 L"controlAccentColor", getColorRGB([NSColor controlAccentColor]));
+        ob_set_n(returnValue,
+                 L"selectedContentBackgroundColor", getColorRGB([NSColor selectedContentBackgroundColor]));
+        ob_set_n(returnValue,
+                 L"separatorColor", getColorRGB([NSColor separatorColor]));
+        ob_set_n(returnValue,
+                 L"unemphasizedSelectedContentBackgroundColor", getColorRGB([NSColor unemphasizedSelectedContentBackgroundColor]));
+    }
 
     PA_ReturnObject(params, returnValue);
 }

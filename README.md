@@ -6,12 +6,12 @@
 **Note**: for v17 and earlier, move `manifest.json` to `Contents`
 
 # 4d-plugin-get-system-colors
-for macOS (10.13 SDK, before dark mode)
+for macOS (10.13 SDK before dark mode & 10.14 SDK)
 
 ### Examples
 
-```
-If (Form event=On Load)
+```4d
+If (Form event code=On Load)
 	$c:=Get system colors 
 	
 	OBJECT GET COORDINATES(*;"T0";$x;$y;$r;$b)
@@ -39,4 +39,4 @@ If (Form event=On Load)
 End if 
 ```
 
-<img width="486" alt="2018-11-01 17 32 02" src="https://user-images.githubusercontent.com/1725068/47841209-337b0f00-ddfc-11e8-91b7-913994c9a33b.png">
+<img width="486" alt="2018-11-01 17 32 02" src="Screenshot.png">
