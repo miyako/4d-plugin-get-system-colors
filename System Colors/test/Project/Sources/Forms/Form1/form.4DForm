@@ -1,0 +1,68 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onPageChange",
+		"onValidate",
+		"onClick",
+		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
+		"onDrop",
+		"onAfterKeystroke",
+		"onMenuSelect",
+		"onPluginArea",
+		"onAfterEdit",
+		"onTimer",
+		"onBoundVariableChange"
+	],
+	"windowTitle": "",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"T0": {
+					"type": "text",
+					"text": "text default",
+					"top": 1,
+					"left": 0,
+					"width": 371,
+					"height": 16,
+					"sizingX": "grow"
+				},
+				"Splitter": {
+					"type": "splitter",
+					"left": 53,
+					"top": 669,
+					"width": 318,
+					"height": 12,
+					"sizingX": "grow"
+				}
+			}
+		}
+	],
+	"method": "method.4dm",
+	"geometryStamp": 24,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}
