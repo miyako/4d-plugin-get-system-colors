@@ -39,13 +39,15 @@ static unsigned int getColorRGB(NSColor *color) {
     
     if(color)
     {
-        color = [color colorUsingColorSpace:[NSColorSpace displayP3ColorSpace]];
-        
+
         /*
+         color = [color colorUsingColorSpace:[NSColorSpace displayP3ColorSpace]];
          color = [color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];//NSDeviceRGBColorSpace
          color = [color colorUsingColorSpace:[NSColorSpace sRGBColorSpace]];
          color = [color colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];//NSCalibratedRGBColorSpace
          */
+        
+        color = [color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
         
         CGFloat red, green, blue, alpha;
         [color getRed:&red green:&green blue:&blue alpha:&alpha];

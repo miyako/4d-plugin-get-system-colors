@@ -1,12 +1,12 @@
 {
 	"editors": [
 		{
-			"type": "explorer"
+			"type": "form",
+			"id": 355,
+			"formName": "Form1"
 		},
 		{
-			"type": "form",
-			"id": 221,
-			"formName": "Form1"
+			"type": "explorer"
 		}
 	]
 }
