@@ -3,8 +3,6 @@
 [![license](https://img.shields.io/github/license/miyako/4d-plugin-get-system-colors)](LICENSE)
 ![downloads](https://img.shields.io/github/downloads/miyako/4d-plugin-get-system-colors/total)
 
-**Note**: for v17 and earlier, move `manifest.json` to `Contents`
-
 # 4d-plugin-get-system-colors
 for macOS (10.13 SDK before dark mode & 10.14 SDK)
 
