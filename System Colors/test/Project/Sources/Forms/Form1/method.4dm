@@ -1,5 +1,6 @@
 
 If (Form event code:C388=On Load:K2:1)
+	
 	$c:=Get system colors
 	
 	OBJECT GET COORDINATES:C663(*; "T0"; $x; $y; $r; $b)

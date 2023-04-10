@@ -33,21 +33,39 @@ void PluginMain(PA_long32 selector, PA_PluginParameters params) {
 	}
 }
 
-static unsigned int getColorRGB(NSColor *color) {
+typedef enum {
+    
+    colorspace_deviceRGBColorSpace_t = 0,
+    colorspace_displayP3ColorSpace_t = 1,
+    colorspace_sRGBColorSpace_t = 2,
+    colorspace_genericRGBColorSpace_t = 3,
+    colorspace_extendedSRGBColorSpace_t = 4
+    
+}colorspace_t;
+
+static unsigned int getColorRGB(NSColor *color, colorspace_t colorspace = colorspace_deviceRGBColorSpace_t) {
     
     unsigned int rgb = 0;
     
     if(color)
     {
-
-        /*
-         color = [color colorUsingColorSpace:[NSColorSpace displayP3ColorSpace]];
-         color = [color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];//NSDeviceRGBColorSpace
-         color = [color colorUsingColorSpace:[NSColorSpace sRGBColorSpace]];
-         color = [color colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];//NSCalibratedRGBColorSpace
-         */
-        
-        color = [color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
+        switch (colorspace) {
+            case colorspace_displayP3ColorSpace_t:
+                color = [color colorUsingColorSpace:[NSColorSpace displayP3ColorSpace]];
+                break;
+            case colorspace_sRGBColorSpace_t:
+                color = [color colorUsingColorSpace:[NSColorSpace sRGBColorSpace]];
+                break;
+            case colorspace_genericRGBColorSpace_t:
+                color = [color colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
+                break;
+            case colorspace_extendedSRGBColorSpace_t:
+                color = [color colorUsingColorSpace:[NSColorSpace extendedSRGBColorSpace]];
+                break;
+            default:
+                color = [color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
+                break;
+        }
         
         CGFloat red, green, blue, alpha;
         [color getRed:&red green:&green blue:&blue alpha:&alpha];
@@ -77,86 +95,131 @@ void Get_system_colors(PA_PluginParameters params) {
     ob_set_n(returnValue,
              L"controlShadowColor", getColorRGB([NSColor controlShadowColor]));
     ob_set_n(returnValue,
-              L"controlDarkShadowColor", getColorRGB([NSColor controlDarkShadowColor]));
+             L"controlDarkShadowColor", getColorRGB([NSColor controlDarkShadowColor]));
     ob_set_n(returnValue,
-              L"controlColor", getColorRGB([NSColor controlColor]));
+             L"controlColor", getColorRGB([NSColor controlColor]));
     ob_set_n(returnValue,
-              L"controlHighlightColor", getColorRGB([NSColor controlHighlightColor]));
+             L"controlHighlightColor", getColorRGB([NSColor controlHighlightColor]));
     ob_set_n(returnValue,
-              L"controlLightHighlightColor", getColorRGB([NSColor controlLightHighlightColor]));
+             L"controlLightHighlightColor", getColorRGB([NSColor controlLightHighlightColor]));
     ob_set_n(returnValue,
-              L"controlTextColor", getColorRGB([NSColor controlTextColor]));
+             L"controlTextColor", getColorRGB([NSColor controlTextColor]));
     ob_set_n(returnValue,
-              L"controlBackgroundColor", getColorRGB([NSColor controlBackgroundColor]));
+             L"controlBackgroundColor", getColorRGB([NSColor controlBackgroundColor]));
     ob_set_n(returnValue,
-              L"selectedControlColor", getColorRGB([NSColor selectedControlColor]));
+             L"selectedControlColor", getColorRGB([NSColor selectedControlColor]));
     ob_set_n(returnValue,
-              L"secondarySelectedControlColor", getColorRGB([NSColor secondarySelectedControlColor]));
+             L"secondarySelectedControlColor", getColorRGB([NSColor secondarySelectedControlColor]));
     ob_set_n(returnValue,
-              L"selectedControlTextColor", getColorRGB([NSColor selectedControlTextColor]));
+             L"selectedControlTextColor", getColorRGB([NSColor selectedControlTextColor]));
     ob_set_n(returnValue,
-              L"disabledControlTextColor", getColorRGB([NSColor disabledControlTextColor]));
+             L"disabledControlTextColor", getColorRGB([NSColor disabledControlTextColor]));
     ob_set_n(returnValue,
-              L"textColor", getColorRGB([NSColor textColor]));
+             L"textColor", getColorRGB([NSColor textColor]));
     ob_set_n(returnValue,
-              L"textBackgroundColor", getColorRGB([NSColor textBackgroundColor]));
+             L"textBackgroundColor", getColorRGB([NSColor textBackgroundColor]));
     ob_set_n(returnValue,
-              L"selectedTextColor", getColorRGB([NSColor selectedTextColor]));
+             L"selectedTextColor", getColorRGB([NSColor selectedTextColor]));
     ob_set_n(returnValue,
-              L"selectedTextBackgroundColor", getColorRGB([NSColor selectedTextBackgroundColor]));
+             L"selectedTextBackgroundColor", getColorRGB([NSColor selectedTextBackgroundColor]));
     ob_set_n(returnValue,
-              L"gridColor", getColorRGB([NSColor gridColor]));
+             L"gridColor", getColorRGB([NSColor gridColor]));
     ob_set_n(returnValue,
-              L"keyboardFocusIndicatorColor", getColorRGB([NSColor keyboardFocusIndicatorColor]));
+             L"keyboardFocusIndicatorColor", getColorRGB([NSColor keyboardFocusIndicatorColor]));
     ob_set_n(returnValue,
-              L"windowBackgroundColor", getColorRGB([NSColor windowBackgroundColor]));
+             L"windowBackgroundColor", getColorRGB([NSColor windowBackgroundColor]));
     ob_set_n(returnValue,
-              L"underPageBackgroundColor", getColorRGB([NSColor underPageBackgroundColor]));
+             L"underPageBackgroundColor", getColorRGB([NSColor underPageBackgroundColor]));
     ob_set_n(returnValue,
-              L"labelColor", getColorRGB([NSColor labelColor]));
+             L"labelColor", getColorRGB([NSColor labelColor]));
     ob_set_n(returnValue,
-              L"secondaryLabelColor", getColorRGB([NSColor secondaryLabelColor]));
+             L"secondaryLabelColor", getColorRGB([NSColor secondaryLabelColor]));
     ob_set_n(returnValue,
-              L"tertiaryLabelColor", getColorRGB([NSColor tertiaryLabelColor]));
+             L"tertiaryLabelColor", getColorRGB([NSColor tertiaryLabelColor]));
     ob_set_n(returnValue,
-              L"quaternaryLabelColor", getColorRGB([NSColor quaternaryLabelColor]));
+             L"quaternaryLabelColor", getColorRGB([NSColor quaternaryLabelColor]));
     ob_set_n(returnValue,
-              L"scrollBarColor", getColorRGB([NSColor scrollBarColor]));
+             L"scrollBarColor", getColorRGB([NSColor scrollBarColor]));
     ob_set_n(returnValue,
-              L"knobColor", getColorRGB([NSColor knobColor]));
+             L"knobColor", getColorRGB([NSColor knobColor]));
     ob_set_n(returnValue,
-              L"selectedKnobColor", getColorRGB([NSColor selectedKnobColor]));
+             L"selectedKnobColor", getColorRGB([NSColor selectedKnobColor]));
     ob_set_n(returnValue,
-              L"windowFrameColor", getColorRGB([NSColor windowFrameColor]));
+             L"windowFrameColor", getColorRGB([NSColor windowFrameColor]));
     ob_set_n(returnValue,
-              L"windowFrameTextColor", getColorRGB([NSColor windowFrameTextColor]));
+             L"windowFrameTextColor", getColorRGB([NSColor windowFrameTextColor]));
     ob_set_n(returnValue,
-              L"selectedMenuItemColor", getColorRGB([NSColor selectedMenuItemColor]));
+             L"selectedMenuItemColor", getColorRGB([NSColor selectedMenuItemColor]));
     ob_set_n(returnValue,
-              L"selectedMenuItemTextColor", getColorRGB([NSColor selectedMenuItemTextColor]));
+             L"selectedMenuItemTextColor", getColorRGB([NSColor selectedMenuItemTextColor]));
     ob_set_n(returnValue,
-              L"highlightColor", getColorRGB([NSColor highlightColor]));
+             L"highlightColor", getColorRGB([NSColor highlightColor]));
     ob_set_n(returnValue,
-              L"shadowColor", getColorRGB([NSColor shadowColor]));
+             L"shadowColor", getColorRGB([NSColor shadowColor]));
     ob_set_n(returnValue,
-              L"headerColor", getColorRGB([NSColor headerColor]));
+             L"headerColor", getColorRGB([NSColor headerColor]));
     ob_set_n(returnValue,
-              L"headerTextColor", getColorRGB([NSColor headerTextColor]));
+             L"headerTextColor", getColorRGB([NSColor headerTextColor]));
     ob_set_n(returnValue,
-              L"alternateSelectedControlColor", getColorRGB([NSColor alternateSelectedControlColor]));
+             L"alternateSelectedControlColor", getColorRGB([NSColor alternateSelectedControlColor]));
     ob_set_n(returnValue,
-              L"alternateSelectedControlTextColor", getColorRGB([NSColor alternateSelectedControlTextColor]));
+             L"alternateSelectedControlTextColor", getColorRGB([NSColor alternateSelectedControlTextColor]));
     ob_set_n(returnValue,
-              L"scrubberTexturedBackgroundColor", getColorRGB([NSColor scrubberTexturedBackgroundColor]));
+             L"scrubberTexturedBackgroundColor", getColorRGB([NSColor scrubberTexturedBackgroundColor]));
+    ob_set_n(returnValue,
+             L"placeholderTextColor", getColorRGB([NSColor placeholderTextColor]));
+    ob_set_n(returnValue,
+             L"linkColor", getColorRGB([NSColor linkColor]));
+    
+    if (@available(macOS 10.13, *)) {
+        ob_set_n(returnValue,
+                 L"findHighlightColor", getColorRGB([NSColor findHighlightColor]));
+    }
+    
     if (@available(macOS 10.14, *)) {
+        
         ob_set_n(returnValue,
                  L"controlAccentColor", getColorRGB([NSColor controlAccentColor]));
+        
+        /*
+        ob_set_n(returnValue,
+                 L"controlAccentColor (extendedSRGB)", getColorRGB([NSColor controlAccentColor], colorspace_extendedSRGBColorSpace_t));
+        
+        ob_set_n(returnValue,
+                 L"controlAccentColor (genericRGB)", getColorRGB([NSColor controlAccentColor], colorspace_genericRGBColorSpace_t));
+
+        ob_set_n(returnValue,
+                 L"controlAccentColor (sRGBColor)", getColorRGB([NSColor controlAccentColor], colorspace_sRGBColorSpace_t));
+        
+        ob_set_n(returnValue,
+                 L"controlAccentColor (deviceRGB)", getColorRGB([NSColor controlAccentColor], colorspace_deviceRGBColorSpace_t));
+        
+        ob_set_n(returnValue,
+                 L"controlAccentColor (displayP3)", getColorRGB([NSColor controlAccentColor], colorspace_displayP3ColorSpace_t));
+   */
+        ob_set_n(returnValue,
+                 L"controlAccentColor (Pressed)",
+                 getColorRGB([[NSColor controlAccentColor]colorWithSystemEffect:NSColorSystemEffectPressed]));
+        ob_set_n(returnValue,
+                 L"controlAccentColor (DeepPressed)",
+                 getColorRGB([[NSColor controlAccentColor]colorWithSystemEffect:NSColorSystemEffectDeepPressed]));
+        ob_set_n(returnValue,
+                 L"controlAccentColor (Disabled)",
+                 getColorRGB([[NSColor controlAccentColor]colorWithSystemEffect:NSColorSystemEffectDisabled]));
+        ob_set_n(returnValue,
+                 L"controlAccentColor (Rollover)",
+                 getColorRGB([[NSColor controlAccentColor]colorWithSystemEffect:NSColorSystemEffectRollover]));
+        
         ob_set_n(returnValue,
                  L"selectedContentBackgroundColor", getColorRGB([NSColor selectedContentBackgroundColor]));
         ob_set_n(returnValue,
                  L"separatorColor", getColorRGB([NSColor separatorColor]));
         ob_set_n(returnValue,
                  L"unemphasizedSelectedContentBackgroundColor", getColorRGB([NSColor unemphasizedSelectedContentBackgroundColor]));
+        ob_set_n(returnValue,
+                 L"unemphasizedSelectedTextColor", getColorRGB([NSColor unemphasizedSelectedTextColor]));
+        ob_set_n(returnValue,
+                 L"unemphasizedSelectedTextBackgroundColor", getColorRGB([NSColor unemphasizedSelectedTextBackgroundColor]));
     }
 
     PA_ReturnObject(params, returnValue);

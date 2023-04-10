@@ -47,8 +47,8 @@
 				},
 				"Splitter": {
 					"type": "splitter",
-					"left": 53,
-					"top": 669,
+					"left": 28,
+					"top": 880,
 					"width": 318,
 					"height": 12,
 					"sizingX": "grow"
@@ -57,7 +57,7 @@
 		}
 	],
 	"method": "method.4dm",
-	"geometryStamp": 24,
+	"geometryStamp": 72,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
