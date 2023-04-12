@@ -6,14 +6,14 @@
 # 4d-plugin-get-system-colors
 for macOS (10.13 SDK before dark mode & 10.14 SDK)
 
-* get control `controlAccentColor` in `deviceRGBColorSpace` 
+* get `controlAccentColor` in `deviceRGBColorSpace` 
 
 ```4d
 $colors:=Get system colors
 $controlAccentColor:=$colors.controlAccentColor
 ```
 
-* blend control `controlAccentColor` with another color and fraction (between `0` to `1`)
+* blend `controlAccentColor` with another color and fraction (between `0` to `1`)
 
 ```4d
 $colors:=Get system colors(Blend with windowBackgroundColor; 0.7)
@@ -24,7 +24,7 @@ $colors:=Get system colors(Blend with blackColor; 0.3)
 $controlAccentColor:=$colors.controlAccentColor
 ```
 
-* blend control `controlAccentColor` with custom color and fraction (between `0` to `1`)
+* blend `controlAccentColor` with custom color and fraction (between `0` to `1`)
 
 ```4d
 $colors:=Get system colors(0x00FF0000; 0.5)
