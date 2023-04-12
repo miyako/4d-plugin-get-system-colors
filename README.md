@@ -30,3 +30,6 @@ $controlAccentColor:=$colors.controlAccentColor
 $colors:=Get system colors(0x00FF0000; 0.5)
 $controlAccentColor:=$colors.controlAccentColor
 ```
+
+<img width="620" alt="dark" src="https://user-images.githubusercontent.com/1725068/231355917-b02047ae-e761-4ee8-8c47-02c790a9c80d.png">
+<img width="620" alt="light" src="https://user-images.githubusercontent.com/1725068/231355919-0964d37a-202c-4b46-bdc0-8d623aa25df2.png">
