@@ -4,7 +4,7 @@
 	"commands": [
 		{
 			"theme": "Get System Color",
-			"syntax": "Get system colors:J",
+			"syntax": "Get system colors(&L;&8):J",
 			"threadSafe": true
 		}
 	]

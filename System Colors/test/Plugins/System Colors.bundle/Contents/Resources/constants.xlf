@@ -1,6 +1,22 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <xliff version="1.0" xmlns:d4="http://www.4d.com/d4-ns">
-    <header>
-        <note>System Colors</note>
-    </header>
+
+    <group resname="themes">
+        <trans-unit id="FD4D3174925643548D64C43D95780006" resname="FD4D3174925643548D64C43D95780006" translate="no">
+            <source>System Colors</source>
+        </trans-unit>
+    </group>
+    
+  <group restype="x-4DK#" d4:groupName="FD4D3174925643548D64C43D95780006">
+    <trans-unit d4:value="-1" id="FD4D3174925643548D64C43D95780006.1">
+      <source>Blend with windowBackgroundColor</source>
+    </trans-unit>
+    <trans-unit d4:value="-2" id="FD4D3174925643548D64C43D95780006.2">
+      <source>Blend with whiteColor</source>
+    </trans-unit>
+    <trans-unit d4:value="-3" id="FD4D3174925643548D64C43D95780006.3">
+      <source>Blend with blackColor</source>
+    </trans-unit>
+  </group>
+
 </xliff>

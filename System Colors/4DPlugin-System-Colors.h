@@ -18,6 +18,15 @@
 
 #pragma mark -
 
+typedef enum {
+ 
+    blend_type_none = 0,
+    blend_type_windowBackgroundColor = -1,
+    blend_type_whiteColor = -2,
+    blend_type_blackColor = -3
+    
+}blend_type_t;
+
 void Get_system_colors(PA_PluginParameters params);
 
 #endif /* PLUGIN_SYSTEM_COLORS_H */

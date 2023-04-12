@@ -1,7 +1,11 @@
 {
 	"forms": {
 		"Form1": {
-			"timeStamp": "2023-04-10T23:44:06.151Z",
+			"timeStamp": "2023-04-10T23:50:43Z",
+			"destination": "detailScreen"
+		},
+		"accent": {
+			"timeStamp": "2023-04-12T05:00:17Z",
 			"destination": "detailScreen"
 		}
 	}

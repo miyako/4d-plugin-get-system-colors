@@ -8,18 +8,18 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lvCwf8lL7howDFFNEPUBSWPgWXQ=
+			cOr64OmCdKeS8r5ElKzyzwiyEyA=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>Resources/constants.xlf</key>
 		<data>
-		8EYtmU597Rx5ms4W3dtiZmpNyPA=
+		v2Mn5m1LgMRBxi0vukbYnc4Sswc=
 		</data>
 		<key>Resources/manifest.json</key>
 		<data>
-		LX9LOQ0Khj+WJRLvqSjmOszmh1A=
+		fR5koHd12qLAOKvmIdPA5+Dp8A0=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -35,7 +35,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Cg0RqjfPJn7u+Xx5MGldoT1QXOcmlz2y/7q47UCcS7A=
+			sG3SiH2QzLNJHpRfQ/85cYYnC9gTdroxk+dzBMH0kRM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -44,14 +44,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qBlehJBuIEwWt9loeoCAWHKbfs2219cgoNQkZ/aCmNQ=
+			d/kyvMMnPzJaK9EYNKtJrO3dmXHhfqMNc7V9gW/Uoi0=
 			</data>
 		</dict>
 		<key>Resources/manifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			MBVk3Qu/K1M2FKWmXDBuyC4ZG1IWcU9zgoW9aGV0cM0=
+			t5yuCksvZmTBhMRC1qCbYz1BxUAaTdGUvKWOmygL14I=
 			</data>
 		</dict>
 		<key>Windows64/System Colors.4DX</key>
