@@ -126,9 +126,9 @@
 		"stamp": "2023-04-10T23:14:53.565Z"
 	},
 	"Sources/Forms/accent/method.4dm": {
-		"startSelection": 42,
-		"endSelection": 42,
-		"firstSelectedLine": 22,
+		"startSelection": 47,
+		"endSelection": 0,
+		"firstSelectedLine": 23,
 		"lastSelectedLine": 22,
 		"folding": [],
 		"bookmarks": [],

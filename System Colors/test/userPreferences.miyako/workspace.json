@@ -1,6 +1,15 @@
 {
 	"editors": [
 		{
+			"type": "method",
+			"id": 2147483645,
+			"codeDescriptor": {
+				"type": 3,
+				"formName": "accent",
+				"methodPath": "/SOURCES/Forms/accent/method.4dm"
+			}
+		},
+		{
 			"type": "form",
 			"id": 222,
 			"formName": "accent"

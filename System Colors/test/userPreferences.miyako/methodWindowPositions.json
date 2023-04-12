@@ -97,7 +97,7 @@
 	},
 	"Sources/Methods/TEST.4dm": {
 		"left": 484,
-		"top": 894,
+		"top": 922,
 		"width": 965,
 		"height": 372
 	},
@@ -163,14 +163,14 @@
 	},
 	"Sources/Forms/Form1/method.4dm": {
 		"left": 670,
-		"top": 694,
+		"top": 722,
 		"width": 1034,
 		"height": 372
 	},
 	"Sources/Forms/accent/method.4dm": {
 		"left": 136,
-		"top": 352,
+		"top": 380,
 		"width": 965,
-		"height": 550
+		"height": 522
 	}
 }
