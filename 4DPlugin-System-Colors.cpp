@@ -101,118 +101,145 @@ static unsigned int getColorRGB(NSColor *color,
 void Get_system_colors(PA_PluginParameters params) {
 
     PA_ObjectRef returnValue = PA_CreateObject();
+
+    // The manifest declares a return type ("...):J") for this command, so the
+    // host expects PA_ReturnObject to be called on every path, including any
+    // path that fails partway through. PluginMain's own catch(...) has no way
+    // to do that (it doesn't have access to `returnValue` or `params` in a
+    // useful shape), so the guarantee has to be made here, at the point that
+    // actually knows what a safe fallback return value looks like.
+    try
+    {
+        blend_type_t blend = (blend_type_t)PA_GetLongParameter(params, 1);
+
+        double fraction = PA_GetDoubleParameter(params, 2);
+
+        // Guard against NaN/Inf as well as out-of-range values: fraction < 0
+        // and fraction > 1 are both false for NaN, so a non-finite value
+        // supplied by the caller would otherwise flow straight into
+        // -blendedColorWithFraction:ofColor: unclamped.
+        if(!isfinite(fraction)){
+            fraction = 0.0;
+        }
+
+        if(fraction<0){
+            fraction = 0.0f;
+        }
+
+        if(fraction>1){
+            fraction = 1.0f;
+        }
+
+            ob_set_n(returnValue,
+                 L"controlShadowColor", getColorRGB([NSColor controlShadowColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"controlDarkShadowColor", getColorRGB([NSColor controlDarkShadowColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"controlColor", getColorRGB([NSColor controlColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"controlHighlightColor", getColorRGB([NSColor controlHighlightColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"controlLightHighlightColor", getColorRGB([NSColor controlLightHighlightColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"controlTextColor", getColorRGB([NSColor controlTextColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"controlBackgroundColor", getColorRGB([NSColor controlBackgroundColor], blend, fraction));
+        if (@available(macOS 10.14, *)) {
+            ob_set_n(returnValue,
+                     L"controlAccentColor", getColorRGB([NSColor controlAccentColor], blend, fraction));
+        }
+        ob_set_n(returnValue,
+                 L"selectedControlColor", getColorRGB([NSColor selectedControlColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"secondarySelectedControlColor", getColorRGB([NSColor secondarySelectedControlColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"selectedControlTextColor", getColorRGB([NSColor selectedControlTextColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"disabledControlTextColor", getColorRGB([NSColor disabledControlTextColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"textColor", getColorRGB([NSColor textColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"textBackgroundColor", getColorRGB([NSColor textBackgroundColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"selectedTextColor", getColorRGB([NSColor selectedTextColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"selectedTextBackgroundColor", getColorRGB([NSColor selectedTextBackgroundColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"gridColor", getColorRGB([NSColor gridColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"keyboardFocusIndicatorColor", getColorRGB([NSColor keyboardFocusIndicatorColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"windowBackgroundColor", getColorRGB([NSColor windowBackgroundColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"underPageBackgroundColor", getColorRGB([NSColor underPageBackgroundColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"labelColor", getColorRGB([NSColor labelColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"secondaryLabelColor", getColorRGB([NSColor secondaryLabelColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"tertiaryLabelColor", getColorRGB([NSColor tertiaryLabelColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"quaternaryLabelColor", getColorRGB([NSColor quaternaryLabelColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"scrollBarColor", getColorRGB([NSColor scrollBarColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"knobColor", getColorRGB([NSColor knobColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"selectedKnobColor", getColorRGB([NSColor selectedKnobColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"windowFrameColor", getColorRGB([NSColor windowFrameColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"windowFrameTextColor", getColorRGB([NSColor windowFrameTextColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"selectedMenuItemColor", getColorRGB([NSColor selectedMenuItemColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"selectedMenuItemTextColor", getColorRGB([NSColor selectedMenuItemTextColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"highlightColor", getColorRGB([NSColor highlightColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"shadowColor", getColorRGB([NSColor shadowColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"headerColor", getColorRGB([NSColor headerColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"headerTextColor", getColorRGB([NSColor headerTextColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"alternateSelectedControlColor", getColorRGB([NSColor alternateSelectedControlColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"alternateSelectedControlTextColor", getColorRGB([NSColor alternateSelectedControlTextColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"scrubberTexturedBackgroundColor", getColorRGB([NSColor scrubberTexturedBackgroundColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"placeholderTextColor", getColorRGB([NSColor placeholderTextColor], blend, fraction));
+        ob_set_n(returnValue,
+                 L"linkColor", getColorRGB([NSColor linkColor], blend, fraction));
     
-    blend_type_t blend = (blend_type_t)PA_GetLongParameter(params, 1);
+        if (@available(macOS 10.13, *)) {
+            ob_set_n(returnValue,
+                     L"findHighlightColor", getColorRGB([NSColor findHighlightColor], blend, fraction));
+        }
     
-    double fraction = PA_GetDoubleParameter(params, 2);
-    
-    if(fraction<0){
-        fraction = 0.0f;
+        if (@available(macOS 10.14, *)) {
+            ob_set_n(returnValue,
+                     L"selectedContentBackgroundColor", getColorRGB([NSColor selectedContentBackgroundColor], blend, fraction));
+            ob_set_n(returnValue,
+                     L"separatorColor", getColorRGB([NSColor separatorColor], blend, fraction));
+            ob_set_n(returnValue,
+                     L"unemphasizedSelectedContentBackgroundColor", getColorRGB([NSColor unemphasizedSelectedContentBackgroundColor], blend, fraction));
+            ob_set_n(returnValue,
+                     L"unemphasizedSelectedTextColor", getColorRGB([NSColor unemphasizedSelectedTextColor], blend, fraction));
+            ob_set_n(returnValue,
+                     L"unemphasizedSelectedTextBackgroundColor", getColorRGB([NSColor unemphasizedSelectedTextBackgroundColor], blend, fraction));
+        }
     }
-    
-    if(fraction>1){
-        fraction = 1.0f;
-    }
-    
-    ob_set_n(returnValue,
-             L"controlShadowColor", getColorRGB([NSColor controlShadowColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"controlDarkShadowColor", getColorRGB([NSColor controlDarkShadowColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"controlColor", getColorRGB([NSColor controlColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"controlHighlightColor", getColorRGB([NSColor controlHighlightColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"controlLightHighlightColor", getColorRGB([NSColor controlLightHighlightColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"controlTextColor", getColorRGB([NSColor controlTextColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"controlBackgroundColor", getColorRGB([NSColor controlBackgroundColor], blend, fraction));
-    if (@available(macOS 10.14, *)) {
-        ob_set_n(returnValue,
-                 L"controlAccentColor", getColorRGB([NSColor controlAccentColor], blend, fraction));
-    }
-    ob_set_n(returnValue,
-             L"selectedControlColor", getColorRGB([NSColor selectedControlColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"secondarySelectedControlColor", getColorRGB([NSColor secondarySelectedControlColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"selectedControlTextColor", getColorRGB([NSColor selectedControlTextColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"disabledControlTextColor", getColorRGB([NSColor disabledControlTextColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"textColor", getColorRGB([NSColor textColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"textBackgroundColor", getColorRGB([NSColor textBackgroundColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"selectedTextColor", getColorRGB([NSColor selectedTextColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"selectedTextBackgroundColor", getColorRGB([NSColor selectedTextBackgroundColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"gridColor", getColorRGB([NSColor gridColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"keyboardFocusIndicatorColor", getColorRGB([NSColor keyboardFocusIndicatorColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"windowBackgroundColor", getColorRGB([NSColor windowBackgroundColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"underPageBackgroundColor", getColorRGB([NSColor underPageBackgroundColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"labelColor", getColorRGB([NSColor labelColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"secondaryLabelColor", getColorRGB([NSColor secondaryLabelColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"tertiaryLabelColor", getColorRGB([NSColor tertiaryLabelColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"quaternaryLabelColor", getColorRGB([NSColor quaternaryLabelColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"scrollBarColor", getColorRGB([NSColor scrollBarColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"knobColor", getColorRGB([NSColor knobColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"selectedKnobColor", getColorRGB([NSColor selectedKnobColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"windowFrameColor", getColorRGB([NSColor windowFrameColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"windowFrameTextColor", getColorRGB([NSColor windowFrameTextColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"selectedMenuItemColor", getColorRGB([NSColor selectedMenuItemColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"selectedMenuItemTextColor", getColorRGB([NSColor selectedMenuItemTextColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"highlightColor", getColorRGB([NSColor highlightColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"shadowColor", getColorRGB([NSColor shadowColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"headerColor", getColorRGB([NSColor headerColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"headerTextColor", getColorRGB([NSColor headerTextColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"alternateSelectedControlColor", getColorRGB([NSColor alternateSelectedControlColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"alternateSelectedControlTextColor", getColorRGB([NSColor alternateSelectedControlTextColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"scrubberTexturedBackgroundColor", getColorRGB([NSColor scrubberTexturedBackgroundColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"placeholderTextColor", getColorRGB([NSColor placeholderTextColor], blend, fraction));
-    ob_set_n(returnValue,
-             L"linkColor", getColorRGB([NSColor linkColor], blend, fraction));
-    
-    if (@available(macOS 10.13, *)) {
-        ob_set_n(returnValue,
-                 L"findHighlightColor", getColorRGB([NSColor findHighlightColor], blend, fraction));
-    }
-    
-    if (@available(macOS 10.14, *)) {
-        ob_set_n(returnValue,
-                 L"selectedContentBackgroundColor", getColorRGB([NSColor selectedContentBackgroundColor], blend, fraction));
-        ob_set_n(returnValue,
-                 L"separatorColor", getColorRGB([NSColor separatorColor], blend, fraction));
-        ob_set_n(returnValue,
-                 L"unemphasizedSelectedContentBackgroundColor", getColorRGB([NSColor unemphasizedSelectedContentBackgroundColor], blend, fraction));
-        ob_set_n(returnValue,
-                 L"unemphasizedSelectedTextColor", getColorRGB([NSColor unemphasizedSelectedTextColor], blend, fraction));
-        ob_set_n(returnValue,
-                 L"unemphasizedSelectedTextBackgroundColor", getColorRGB([NSColor unemphasizedSelectedTextBackgroundColor], blend, fraction));
+    catch(...)
+    {
+        // Guarantee the SDK return call happens on every path. The manifest
+        // declares a return type for this command, so failing to call
+        // PA_ReturnObject here (and instead letting the exception propagate to
+        // PluginMain's empty catch(...)) would leave the host waiting for a
+        // return value that never arrives -- a freeze, not just a lost result.
+        // Whatever keys were already set on returnValue before the failure are
+        // returned as-is; any keys not yet reached simply stay absent.
     }
 
     PA_ReturnObject(params, returnValue);
